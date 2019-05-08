@@ -45,17 +45,14 @@
 				<router-link :to="{name:'ClubList',query:{typeId:1}}">社团检索</router-link>
 			</el-menu-item>
 			<el-menu-item index="6">
-				<router-link :to="{name:'FileList',query:{id:2}}">资料下载</router-link>
+				<router-link :to="{name:'FileList',query:{fileTypeId:3}}">资料下载</router-link>
 			</el-menu-item>
-			<el-menu-item index="7">
+			<!-- <el-menu-item index="7">
 				<router-link :to="{name:'ClubList',query:{num:1}}">社团申请</router-link>
-			</el-menu-item>
+			</el-menu-item> -->
 			<el-menu-item index="7" class="rightMenu">
-				<router-link :to="{name:'Login'}">登录</router-link>
+				<a :href="adminAccessUrl" target="_blank">登录</a>
 			</el-menu-item>
-		<!-- <div class="rightMenu">
-				<el-button type="primary"><router-link :to="{name:'ClubList',query:{num:1}}">登录</router-link></el-button>
-		</div> -->
 		</el-menu>
 		
 	</div>
@@ -69,6 +66,7 @@
 		data() {
 			return {
 				activeIndex: '1',
+				adminAccessUrl:"http://localhost:8080/"
 			}
 		},
 		created: function() {},

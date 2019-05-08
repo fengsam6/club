@@ -1,14 +1,22 @@
 <template>
 	<div v-if="filePage != null">
 		<el-form :inline="true">
-			
-		
+			<el-form-item label="文件名称">
+				<el-input placeholder="请输入文件名称" prefix-icon="el-icon-search" v-model="fileName" class="input-with-select" width="120px"></el-input>
+			</el-form-item>
+			<!-- <el-form-item label="文件类型">
+				<el-select v-model="fileTypeId" placeholder="请选择文件类型">
+					<el-option label="所有" value=""></el-option>
+					<el-option v-for="fileType in fileTypeList" :key="fileType.id" :label="fileType.type" :value="fileType.id"></el-option>
+				</el-select>
+			</el-form-item> -->
+			<el-form-item><el-button type="primary" @click="find" icon="el-icon-search">查询</el-button></el-form-item>
 		</el-form>
 		<el-table :data="fileData" stripe style="width:100%" border>
 			<el-table-column prop="id" label="num" width="100"></el-table-column>
 			<el-table-column prop="fileName" label="文件名称" width="340"></el-table-column>
 			<el-table-column prop="filePath" label="文件路径" width="340"></el-table-column>
-			<el-table-column prop="fileTypeId" label="文件类型id"></el-table-column>
+			<!-- <el-table-column prop="fileTypeId" label="文件类型id"></el-table-column> -->
 			<el-table-column fixed="right" label="操作" width="300">
 				<template slot-scope="scope">
 					<el-button type="primary" icon="el-icon-edit" @click="editPage(scope.row)" size="mini">编辑</el-button>
@@ -28,11 +36,13 @@ export default {
 		return {
 			filePage: {},
 			fileData:[],
+			fileName:null,
+			fileTypeList:[],
 			currentPage:1
 		};
 	},
 	methods: {
-		getFileList: function(typeId, pageNum, pageSize) {
+		getFilePage: function(typeId, pageNum, pageSize) {
 			this.$axios
 				.get('/api/files', {
 					params: {
@@ -51,14 +61,54 @@ export default {
 					}
 				});
 		},
-		refreshFilePage:function(){
-				var typeId = this.$route.params.typeId;
-				this.getFileList(typeId,this.currentPage, 8);
-		}
+		getFileTypeList: function() {
+			this.$axios.get('/api/fileTypes').then(res => {
+				if (res.data.code == OK) {
+					this.fileTypeList = res.data.data;
+				} else {
+					this.$message.error(res.data.data);
+				}
+			});
+		},
+		editPage: function(row) {
+			var id = row.id;
+			console.log(id);
+			this.$router.push({ name: 'EditFile', query: {id: id} });
+		},
+		addPage: function() {
+			this.$router.push({ name: 'AddFile' });
+		},
+		deleteDao: function(fileId) {
+			this.$axios.delete('/api/files/' + fileId).then(res => {
+				if (res.data.code == OK) {
+					this.$message.success('删除成功');
+				} else {
+					this.$message.error(res.data.data);
+				}
+			});
+		},
+		deleteFile: function(row) {
+			var fileId = row.id;
+			this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+				confirmButtonText: '确定',
+				cancelButtonText: '取消',
+				type: 'warning'
+			}).then(() => {
+				this.deleteDao(fileId);
+				this.getFilePage(3,this.currentPage, 8);
+			});
+		},
+		find: function() {
+			this.getFilePage(this.currentPage, 8);
+		},
+		refreshFilePage: function() {
+			this.getFilePage(this.currentPage, 8);
+		},
 	},
 	created() {
 		var typeId = this.$route.params.typeId;
-		this.getFileList(typeId,this.currentPage, 8);
+		this.getFilePage(typeId,this.currentPage, 8);
+		this.getFileTypeList();
 	}
 };
 </script>

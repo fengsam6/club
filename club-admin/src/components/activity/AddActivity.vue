@@ -1,13 +1,12 @@
 <template>
 	<el-form class="" :model="activity" label-width="100px">
 		<el-form-item label="活动名称"><el-input v-model="activity.activityName"></el-input></el-form-item>
-		<el-form-item label="活动举行时间"><el-date-picker type="date" placeholder="选择日期" v-model="activity.holdTime"></el-date-picker></el-form-item>
+		<el-form-item label="活动举行时间"><el-date-picker format="yyyy 年 MM 月 dd 日" value-format="yyyy 年 MM 月 dd 日" type="date" placeholder="选择日期" v-model="activity.holdTime"></el-date-picker></el-form-item>
 		<el-form-item label="活动地点"><el-input v-model="activity.site"></el-input></el-form-item>
 		<quill-editor v-model="activity.introduce" :options="editorOption"></quill-editor>
 		<el-form-item>
-			<el-upload class="upload-demo" action="/api/files/upload" :on-change="handleChange" :file-list="fileList" :on-remove="beforeRemove">
-				<!-- <i class="el-icon-upload"></i> -->
-				<el-button size="small" type="primary">点击上传</el-button>
+			<el-upload  ref="upload" class="upload-demo" action="/api/files/upload" :on-change="handleChange" :file-list="fileList" :on-remove="beforeRemove" :auto-upload="false">
+				<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
 				<div slot="tip" class="el-upload__tip">选择要上传的文件，且不超过2M</div>
 			</el-upload>
 		</el-form-item>
@@ -42,7 +41,10 @@ export default {
 		};
 	},
 	methods: {
-		add: function() {
+		add:function () {
+			this.$refs.upload.submit();
+		},
+		addActivitie: function() {
 			console.log(this.activity);
 			this.$axios.post('/api/activities/', this.activity).then(res => {
 				console.log(this.activity);
@@ -79,6 +81,7 @@ export default {
 				this.activity.fileId = this.file.id;
 				this.file.id = 0;
 				console.log(this.activity.fileId);
+				this.addActivitie();
 			}
 			this.fileList = fileList.slice(-3);
 		},

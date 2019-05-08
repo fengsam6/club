@@ -10,7 +10,6 @@ import ActivityList from '@/components/activity/ActivityList'
 import File from '@/components/file/File'
 import FileList from '@/components/file/FileList'
 
-import Login from '@/components/user/Login'
 
 Vue.use(Router)
 /* eslint-disable */
@@ -62,11 +61,7 @@ export default new Router({
 			path: '/files',
 			component: FileList
 		},
-		{
-			name: 'Login',
-			path: '/login.html',
-			component: Login
-		},
+		
 		{
 			path: '*',
 			redirect: "/"

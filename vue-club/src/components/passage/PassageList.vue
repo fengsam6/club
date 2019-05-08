@@ -5,7 +5,7 @@
 				当前位置:
 				<router-link :to="{ name: 'Home' }">首页</router-link>
 				>
-				<span class="large_type">社团风采</span>
+				<span class="large_type">社团快讯</span>
 				>
 				<router-link :to="{ name: 'PassageList', query: { typeId: newsPageVo.passageType.id } }" class="news-title" v-if="newsPageVo.passageType != null">
 					{{ newsPageVo.passageType.type }}

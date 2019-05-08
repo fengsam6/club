@@ -1,6 +1,13 @@
 <template>
-	<div id="app">
-		<router-view />
+	<div >
+		<v-header />
+		<el-container width="100%">
+			<el-aside width="200px" class="left-nav-container"><left-nav /></el-aside>
+			<el-container  direction="vertical">
+				<router-view class="main" />
+				<v-footer />
+			</el-container>
+		</el-container>
 	</div>
 </template>
 
@@ -9,10 +16,9 @@ import LeftNav from '@/components/common/LeftNav';
 import Header from '@/components/common/Header';
 import Footer from '@/components/common/Footer';
 export default {
-	name: 'App',
+	name: 'Main',
 	data() {
 		return {
-			
 		};
 	},
 	components: {
@@ -24,12 +30,12 @@ export default {
 </script>
 
 <style>
-#app {
-	font-family: 'Avenir', Helvetica, Arial, sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	color: #2c3e50;
-}
 
+
+.main {
+	min-height: 560px;
+	padding: 15px;
+	margin-bottom: 25px;
+}
 
 </style>

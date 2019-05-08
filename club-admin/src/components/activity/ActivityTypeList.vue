@@ -1,11 +1,15 @@
 <template>
-	<el-menu default-active="activeIndex" class="el-menu-vertical-demo" active-text-color="#9a0e14" text-color="#000">
-		<el-menu-item  v-for="(activityType, index) in activityTypeList" :key="index">
-			<span slot="title">
-				<router-link :to="{name:'ActivityList',query:{typeId:activityType.id}}">{{ activityType.type }}</router-link>
-			</span>
-		</el-menu-item>
-	</el-menu>
+	<el-table :data="activityTypeList" stripe style="width:100%" border>
+		<el-table-column prop="id" label="id" ></el-table-column>
+		<el-table-column prop="type" label="活动类型" ></el-table-column>
+		<el-table-column fixed="right" label="操作" width="460">
+			<template slot-scope="scope">
+				<el-button type="primary" icon="el-icon-edit" @click="editPage(scope.row)" size="mini">编辑</el-button>
+				<el-button type="success" icon="el-icon-plus" @click="addPage()" size="mini">添加</el-button>
+				<el-button type="danger" icon="el-icon-delete" @click="deletePassage(scope.row)" size="mini">删除</el-button>
+			</template>
+		</el-table-column>
+	</el-table>
 </template>
 
 <script>
@@ -23,7 +27,7 @@
 					if (res.data.code == OK) {
 						this.activityTypeList = res.data.data;
 					} else {
-						this.$layer.alert(res.data.data);
+						// this.$layer.alert(res.data.data);
 					}
 				});
 			}
@@ -35,9 +39,5 @@
 </script>
 
 <style scoped="scoped">
-	.router-link-exact-active.router-link-active{
-		display: block;
-		width: 100%;
-		background-color: #9a0e14;
-	}
+	
 </style>

@@ -6,16 +6,16 @@
 			</el-form-item>
 			<el-form-item label="新闻类型">
 				<el-select v-model="pasageTypeId" placeholder="请选择新闻类型">
-					<el-option  label="所有" value=""></el-option>
+					<el-option label="所有" value=""></el-option>
 					<el-option v-for="newsType in newsTypeList" :key="newsType.id" :label="newsType.type" :value="newsType.id"></el-option>
 				</el-select>
 			</el-form-item>
 			<el-form-item><el-button type="primary" @click="find" icon="el-icon-search">查询</el-button></el-form-item>
 		</el-form>
 		<el-table :data="passageData" stripe style="width:100%" border>
-			<el-table-column prop="id" label="id" width="180"></el-table-column>
+			<el-table-column prop="id" label="id" width="80"></el-table-column>
 			<el-table-column prop="title" label="标题" width="180"></el-table-column>
-			<el-table-column prop="passageTypeId" label="文章类型id" width="180"></el-table-column>
+			<el-table-column prop="passageType.type" label="文章类型" width="180"></el-table-column>
 			<el-table-column prop="publisher" label="发布者" width="180"></el-table-column>
 			<el-table-column prop="publishTime" label="发布时间"></el-table-column>
 			<el-table-column prop="clickNum" label="点击次数" width="180"></el-table-column>
@@ -40,7 +40,6 @@
 
 <script>
 const OK = 200;
-import pasageTypeList from '@/components/passage/PassageTypeList.vue';
 export default {
 	data() {
 		return {
@@ -53,7 +52,7 @@ export default {
 			currentPage: 1
 		};
 	},
-	components: { pasageTypeList },
+	components: {  },
 	methods: {
 		getPassagePage: function(pageNum, pageSize) {
 			this.$axios
@@ -66,7 +65,7 @@ export default {
 					}
 				})
 				.then(res => {
-					if (res.data.code == OK) {
+					if (res != null && res.data.code == OK) {
 						this.passagePage = res.data.data;
 						this.passageData = this.passagePage.list;
 						this.pages = this.passagePage.pages;
@@ -78,7 +77,7 @@ export default {
 		editPage: function(row) {
 			var id = row.id;
 			console.log(row.id);
-			this.$router.push({ name: 'EditPassage', params: { id: id } });
+			this.$router.push({ name: 'EditPassage', query: { id: id } });
 		},
 		addPage: function() {
 			this.$router.push({ name: 'AddPassage' });
@@ -111,7 +110,7 @@ export default {
 		},
 		getNewsTypeList: function() {
 			this.$axios.get('/api/passageTypes').then(res => {
-				if (res.data.code == OK) {
+				if (res != null && res.data.code == OK) {
 					this.newsTypeList = res.data.data;
 				} else {
 					this.$message.error(res.data.data);

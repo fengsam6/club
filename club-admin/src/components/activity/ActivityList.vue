@@ -12,11 +12,12 @@
 			<el-form-item><el-button type="primary" @click="find" icon="el-icon-search">查询</el-button></el-form-item>
 		</el-form>
 		<el-table :data="activityData" stripe style="width:100%" border>
-			<el-table-column prop="id" label="id" width="180"></el-table-column>
-			<el-table-column prop="activityName" label="活动名称" width="180"></el-table-column>
+			<el-table-column prop="id" label="id" width="80"></el-table-column>
+			<el-table-column prop="activityName" label="活动名称" width="220"></el-table-column>
 			<el-table-column prop="site" label="活动地点" width="180"></el-table-column>
+			<el-table-column prop="applyTime" label="活动申请时间" width="140"></el-table-column>
 			<el-table-column prop="holdTime" label="活动举行时间"></el-table-column>
-			<el-table-column prop="activityTypeId" label="活动类型id" width="180"></el-table-column>
+			<el-table-column prop="activityType.type" label="活动类型" width="120"></el-table-column>
 			<el-table-column fixed="right" label="操作" width="270">
 				<template slot-scope="scope">
 					<el-button type="primary" icon="el-icon-edit" @click="editPage(scope.row)" size="mini">编辑</el-button>
@@ -38,7 +39,6 @@
 
 <script>
 const OK = 200;
-import pasageTypeList from '@/components/activity/activityTypeList.vue';
 export default {
 	data() {
 		return {
@@ -52,7 +52,7 @@ export default {
 			activitySite: null
 		};
 	},
-	components: { pasageTypeList },
+	components: {  },
 	methods: {
 		getActivityPage: function(pageNum, pageSize) {
 			this.$axios
@@ -78,7 +78,7 @@ export default {
 		editPage: function(row) {
 			var id = row.id;
 			console.log(row.id);
-			this.$router.push({ name: 'EditActivity', params: { id: id } });
+			this.$router.push({ name: 'EditActivity', query: { id: id } });
 		},
 		addPage: function() {
 			this.$router.push({ name: 'AddActivity' });

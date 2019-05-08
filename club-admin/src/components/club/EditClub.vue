@@ -2,7 +2,7 @@
 	<el-form class="" :model="club" label-width="80px">
 		<el-form-item label="社团编号"><el-input v-model="club.num"></el-input></el-form-item>
 		<el-form-item label="社团名称"><el-input v-model="club.name"></el-input></el-form-item>
-		<el-form-item label="社团创建时间"><el-date-picker type="date" placeholder="选择日期" v-model="club.createTime"></el-date-picker></el-form-item>
+		<el-form-item label="社团创建时间" label-width="120px"><el-date-picker type="date" placeholder="选择日期" v-model="club.createTime"></el-date-picker></el-form-item>
 		<quill-editor
 			v-model="club.introduce"
 			ref="myQuillEditor"
@@ -35,7 +35,6 @@ export default {
 			editorOption: {
 				placeholder: '输入社团内容：',
 				// 编辑器的配置
-				// something config
 			theme:'snow'
 			}
 		};
@@ -64,7 +63,7 @@ export default {
 					console.log(res.data);
 					if (res.data.code == OK) {
 						this.$message({
-							message: '更新文章成功',
+							message: '更新社团成功',
 							type: 'success'
 						});
 						this.$router.push({name:"ClubList"})
@@ -98,7 +97,7 @@ export default {
 		}
 	},
 	created() {
-		var num= this.$route.params.num;
+		var num= this.$route.query.num;
 		this.get(num);
 		this.getClubTypeList();
 		

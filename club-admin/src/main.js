@@ -7,6 +7,9 @@ import router from './router'
 import axios from 'axios'
 import layer from 'vue-layer'
 
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies)
+
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import VueQuillEditor from "vue-quill-editor"
@@ -16,16 +19,42 @@ import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 
 Vue.use(VueQuillEditor)
+
+//开启debug模式
+Vue.config.debug = true;
+axios.defaults.withCredentials=true;
 Vue.prototype.$axios = axios
+
 Vue.prototype.$layer = layer(Vue);
+
 Vue.use(ElementUI);
 
 Vue.config.productionTip = false
 
+const AuthenticationFailCode = 3005
+
+axios.interceptors.response.use(response => {
+	console.log(response)
+	if(response.data.code == AuthenticationFailCode){
+		// this.$message.error(response.data.message);
+		router.push({name:"Login"})
+	}
+	return response;
+}, error => {
+	console.log(error)
+	if (error.response) {
+		
+	}
+	return Promise.reject(error.response.data) // 返回接口返回的错误信息
+});
+
+
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  router,
-  components: { App },
-  template: '<App/>'
+	el: '#app',
+	router,
+	components: {
+		App
+	},
+	template: '<App/>'
 })

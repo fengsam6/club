@@ -17,7 +17,7 @@
 			<el-table-column prop="name" label="社团名称" width="180"></el-table-column>
 			<!-- <el-table-column prop="introduce" label="文社团简介" width="180"></el-table-column> -->
 			<el-table-column prop="createTime" label="创建时间" width="180"></el-table-column>
-			<el-table-column prop="clubTypeId" label="团类型id"></el-table-column>
+			<el-table-column prop="clubType.type" label="团类型"></el-table-column>
 			<el-table-column prop="status" label="社团状态" width="180"></el-table-column>
 			<el-table-column fixed="right" label="操作" width="270">
 				<template slot-scope="scope">
@@ -40,7 +40,6 @@
 
 <script>
 const OK = 200;
-import EditClub from '@/components/club/EditClub';
 export default {
 	data() {
 		return {
@@ -78,7 +77,7 @@ export default {
 		editPage: function(row) {
 			var num = row.num;
 			console.log(num);
-			this.$router.push({ name: 'EditClub', params: { num: num } });
+			this.$router.push({ name: 'EditClub', query: { num: num } });
 		},
 		addPage: function() {
 			this.$router.push({ name: 'AddClub' });

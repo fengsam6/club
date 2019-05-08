@@ -13,17 +13,27 @@
 		</div>
 
 		<div v-html="activity.introduce" class="introduce"></div>
+
+		<div v-for="file in fileList" :key="file.id">
+			<img :src="'/fileServer' + file.filePath" class="show-image" :alt="file.fileName" v-if="isImage(file.fileName)" />
+			<a :href="'/fileServer' + file.filePath" v-else>{{ file.fileName }}</a>
+		</div>
+
+		<Share />
 	</div>
 </template>
 
 <script>
+import Share from '@/components/common/Share.vue';
 const OK = 200;
 export default {
 	data() {
 		return {
-			activity: {}
+			activity: {},
+			fileList: []
 		};
 	},
+	components: { Share },
 	methods: {
 		get: function() {
 			var id = this.$route.params.id;
@@ -31,10 +41,18 @@ export default {
 				console.log(res.data);
 				if (res.data.code == OK) {
 					this.activity = res.data.data;
+					this.fileList = this.activity.fileList;
 				} else {
 					this.$layer.alert(res.data.data);
 				}
 			});
+		},
+		isImage: function(fileName) {
+			var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
+			if (ext == 'png' || ext == 'jpg') {
+				return true;
+			}
+			return false;
 		}
 	},
 	created() {
@@ -55,7 +73,7 @@ export default {
 	color: #9a0e14;
 	margin-top: 10px;
 }
-.wrap{
+.wrap {
 	float: right;
 }
 .time {
@@ -74,5 +92,9 @@ export default {
 	padding: 80px 20px 0;
 	text-indent: 5px;
 	text-align: left;
+}
+.show-image {
+	width: 420px;
+	height: 360px;
 }
 </style>

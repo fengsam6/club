@@ -1,11 +1,15 @@
 <template>
-	<el-menu default-active="1" class="el-menu-vertical-demo" active-text-color="#9a0e14" text-color="#000">
-		<el-menu-item v-for="(clubType, index) in clubTypeList" :key="index">
-			<span slot="title">
-				<router-link :to="{ name: 'ClubList', query: { typeId: clubType.id } }">{{ clubType.type }}</router-link>
-			</span>
-		</el-menu-item>
-	</el-menu>
+	<el-table :data="clubTypeList" stripe style="width:100%" border>
+		<el-table-column prop="id" label="id" ></el-table-column>
+		<el-table-column prop="type" label="文章类型" ></el-table-column>
+		<el-table-column fixed="right" label="操作" width="360">
+			<template slot-scope="scope">
+				<el-button type="primary" icon="el-icon-edit" @click="editPage(scope.row)" size="mini">编辑</el-button>
+				<el-button type="success" icon="el-icon-plus" @click="addPage()" size="mini">添加</el-button>
+				<el-button type="danger" icon="el-icon-delete" @click="deletePassage(scope.row)" size="mini">删除</el-button>
+			</template>
+		</el-table-column>
+	</el-table>
 </template>
 
 <script>
@@ -34,9 +38,5 @@ export default {
 };
 </script>
 <style scoped="scoped">
-.router-link-exact-active.router-link-active {
-	display: block;
-	width: 100%;
-	background-color: #9a0e14;
-}
+
 </style>

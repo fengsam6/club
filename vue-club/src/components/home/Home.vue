@@ -75,17 +75,17 @@
 		</el-row> -->
 		<div class="news-title-wrap show-wrap"><div class="news-title show">视展青春</div></div>
 		<el-row :gutter="10">
-			<el-col :span="6">
-				<div class="img-show"><img src="/static/img/p1.jpg" alt="" class="show-picture" /></div>
+			<el-col :span="6" v-for="activity in activityList" :key="activity.id">
+				<a class="img-show"><img :src="'/fileServer'" alt="activity.activityName" class="show-picture" /></a>
 			</el-col>
 			<el-col :span="6">
-				<div class="img-show"><img src="/static/img/p2.jpg" alt="" class="show-picture" /></div>
+				<div class="img-show"><img src="/fileServer/show-img/p2.jpg" alt="" class="show-picture" /></div>
 			</el-col>
 			<el-col :span="6">
-				<div class="img-show"><img src="/static/img/p3.jpg" alt="" class="show-picture" /></div>
+				<div class="img-show"><img src="/fileServer/show-img/p3.jpg" alt="" class="show-picture" /></div>
 			</el-col>
 			<el-col :span="6">
-				<div class="img-show"><img src="/static/img/p4.jpg" alt="" class="show-picture" /></div>
+				<div class="img-show"><img src="/fileServer/show-img/p4.jpg" alt="" class="show-picture" /></div>
 			</el-col>
 		</el-row>
 	</div>
@@ -99,7 +99,8 @@ export default {
 		return {
 			topNoticesVo: {},
 			topNewsListVo: {},
-			topActivityVo: []
+			topActivityVo: {},
+			activityList:[]
 		};
 	},
 	components: {
@@ -138,14 +139,18 @@ export default {
 		},
 		getTopActivityList: function(typeId, n) {
 			this.$axios
-				.get('/api/activities/top/' + n, {
+				.get('/api/activities' , {
 					params: {
-						activityTypeId: typeId
+						activityTypeId: typeId,
+						pageNum: 1,
+						pageSize: n
 					}
 				})
 				.then(res => {
 					if (res.data.code == OK) {
-						this.topNewsListVo = res.data.data;
+						this.topActivityVo = res.data.data;
+						this.activityList = this.topActivityVo.activityList;
+						console.log(this.topActivityVo)
 					} else {
 						this.$layer.alert('error');
 					}
@@ -155,6 +160,7 @@ export default {
 	created() {
 		this.getTopNotices(1, 8);
 		this.getTopNewsList(2, 8);
+		this.getTopActivityList(2,4)
 	}
 };
 </script>
@@ -223,5 +229,6 @@ export default {
 	width: 280px;
 	height: 280px;
 	padding: 8px;
+	cursor: pointer;
 }
 </style>

@@ -18,15 +18,22 @@ module.exports = {
 				pathRewrite: {
 					'^/api': '/club/api'
 				},
-				'/admin': {
+			},
+			'/admin': {
 				target: 'http://localhost:8082',
 				changeOrigin: true,
 				pathRewrite: {
 					'^/admin': '/club/admin'
 				}
+			},
+			'/fileServer': {
+				target: 'http://localhost:8013',
+				// target: 'http://localhost:8010',
+				changeOrigin: true,
+				pathRewrite: {
+					'^/fileServer': '/'
+				}
 			}
-			}
-			// '/api': 'http://localhost:8010/club/api/'
 		},
 
 		// Various Dev Server settings
