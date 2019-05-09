@@ -41,6 +41,7 @@ export default {
 			this.$axios.get('/api/fileTypes').then(res => {
 				if (res.data.code == OK) {
 					this.newsTypeList = res.data.data;
+					
 				} else {
 					this.$message.error(res.data.data);
 				}
@@ -56,6 +57,7 @@ export default {
 			if (response != null && response.code == OK) {
 				console.log(response.data);
 				this.$message.success("上传文件成功");
+				this.$router.push({name:"FileList"})
 			}
 			this.fileList = fileList.slice(-3);
 		},

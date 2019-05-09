@@ -10,6 +10,7 @@
 				</el-select>
 			</el-form-item>
 			<el-form-item><el-button type="primary" @click="find" icon="el-icon-search">查询</el-button></el-form-item>
+			<el-button type="success" icon="el-icon-plus" @click="addPage()" >添加</el-button>
 		</el-form>
 		<el-table :data="activityData" stripe style="width:100%" border>
 			<el-table-column prop="id" label="id" width="80"></el-table-column>

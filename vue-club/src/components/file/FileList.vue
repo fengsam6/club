@@ -69,7 +69,7 @@ export default {
 		}
 	},
 	created() {
-		var typeId = this.$route.params.typeId;
+		var typeId = this.$route.query.typeId;
 		this.getFileList(3,this.currentPage, 8);
 	}
 };

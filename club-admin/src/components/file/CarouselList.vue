@@ -1,23 +1,17 @@
 <template>
 	<div v-if="filePage != null">
-		<el-form :inline="true">
+		<!-- <el-form :inline="true">
 			<el-form-item label="文件名称">
 				<el-input placeholder="请输入文件名称" prefix-icon="el-icon-search" v-model="fileName" class="input-with-select" width="120px"></el-input>
 			</el-form-item>
-			<!-- <el-form-item label="文件类型">
-				<el-select v-model="fileTypeId" placeholder="请选择文件类型">
-					<el-option label="所有" value=""></el-option>
-					<el-option v-for="fileType in fileTypeList" :key="fileType.id" :label="fileType.type" :value="fileType.id"></el-option>
-				</el-select>
-			</el-form-item> -->
 			<el-form-item><el-button type="primary" @click="find" icon="el-icon-search">查询</el-button></el-form-item>
-			<el-button type="success" icon="el-icon-plus" @click="addPage()">添加</el-button>
-		</el-form>
+		</el-form> -->
+		<el-button type="success" icon="el-icon-plus" @click="addPage()" size="mini">添加</el-button>
 		<el-table :data="fileData" stripe style="width:100%" border>
 			<el-table-column prop="id" label="num" width="100"></el-table-column>
-			<el-table-column prop="fileName" label="文件名称" width="340"></el-table-column>
-			<el-table-column prop="filePath" label="文件路径" width="340"></el-table-column>
-			<!-- <el-table-column prop="fileTypeId" label="文件类型id"></el-table-column> -->
+			<el-table-column prop="fileName" label="图片名称" width="340"></el-table-column>
+			<el-table-column prop="filePath" label="图片路径" width="340"></el-table-column>
+			<el-table-column prop="passageId" label="图片关联文章id" width="340"></el-table-column>
 			<el-table-column fixed="right" label="操作" width="300">
 				<template slot-scope="scope">
 					<el-button type="primary" icon="el-icon-edit" @click="editPage(scope.row)" size="mini">编辑</el-button>
@@ -72,12 +66,12 @@ export default {
 			});
 		},
 		editPage: function(row) {
-			var id = row.id;
-			console.log(id);
-			this.$router.push({ name: 'EditFile', query: {id: id} });
+			var passageId = row.passageId;
+			console.log(passageId);
+			this.$router.push({ name: 'EditPassage', query: {id: passageId} });
 		},
 		addPage: function() {
-			this.$router.push({ name: 'AddFile' });
+			this.$router.push({ name: 'AddPassage' });
 		},
 		deleteDao: function(fileId) {
 			this.$axios.delete('/api/files/' + fileId).then(res => {
@@ -96,7 +90,7 @@ export default {
 				type: 'warning'
 			}).then(() => {
 				this.deleteDao(fileId);
-				this.getFilePage(3,this.currentPage, 8);
+				this.getFilePage(4,this.currentPage, 8);
 			});
 		},
 		find: function() {
@@ -109,9 +103,8 @@ export default {
 		},
 	},
 	created() {
-		
 		var fileTypeId = this.$route.query.fileTypeId;
-		this.getFilePage(fileTypeId,this.currentPage, 8);
+		this.getFilePage(4,this.currentPage, 8);
 		this.getFileTypeList();
 	}
 };

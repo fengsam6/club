@@ -22,6 +22,9 @@ import ActivityTypeList from '@/components/activity/ActivityTypeList'
 import AddFile from '@/components/file/AddFile'
 import EditFile from '@/components/file/EditFile'
 import FileList from '@/components/file/FileList'
+import CarouselList from '@/components/file/CarouselList'
+import HotActivities from '@/components/file/HotActivities'
+
 
 import AddUser from '@/components/user/AddUser'
 import EditUser from '@/components/user/EditUser'
@@ -126,7 +129,18 @@ export default new Router({
 					path: 'files',
 					component: FileList
 				},
-
+				{
+					name: 'CarouselList',
+					path: 'carousels',
+					component: CarouselList
+				},
+				{
+					name: 'HotActivities',
+					path: 'hotActivities',
+					component: HotActivities
+				},
+				
+				
 				{
 					name: 'AddUser',
 					path: 'users/add.html',

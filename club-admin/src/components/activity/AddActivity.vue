@@ -1,13 +1,15 @@
 <template>
 	<el-form class="" :model="activity" label-width="100px">
 		<el-form-item label="活动名称"><el-input v-model="activity.activityName"></el-input></el-form-item>
-		<el-form-item label="活动举行时间"><el-date-picker format="yyyy 年 MM 月 dd 日" value-format="yyyy 年 MM 月 dd 日" type="date" placeholder="选择日期" v-model="activity.holdTime"></el-date-picker></el-form-item>
+		<el-form-item label="活动举行时间">
+			<el-date-picker format="yyyy 年 MM 月 dd 日" value-format="yyyy 年 MM 月 dd 日" type="date" placeholder="选择日期" v-model="activity.holdTime"></el-date-picker>
+		</el-form-item>
 		<el-form-item label="活动地点"><el-input v-model="activity.site"></el-input></el-form-item>
 		<quill-editor v-model="activity.introduce" :options="editorOption"></quill-editor>
 		<el-form-item>
-			<el-upload  ref="upload" class="upload-demo" action="/api/files/upload" :on-change="handleChange" :file-list="fileList" :on-remove="beforeRemove" :auto-upload="false">
-				<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-				<div slot="tip" class="el-upload__tip">选择要上传的文件，且不超过2M</div>
+			<el-upload ref="upload" class="upload-demo" :action="'/api/files/uploadImg?relativePath='+relativePath" :on-change="handleChange" :file-list="fileList" :on-remove="beforeRemove" :auto-upload="false">
+				<el-button slot="trigger" size="small" type="primary">选取图片</el-button>
+				<div slot="tip" class="el-upload__tip">选择要上传的图片，且不超过1M</div>
 			</el-upload>
 		</el-form-item>
 		<el-form-item label="活动类型" prop="activityTypeId">
@@ -37,12 +39,13 @@ export default {
 			},
 			imageUrl: '',
 			fileList: [],
-			file: { id: 0 }
+			file: {activityId:0},
+			relativePath:"/images/activity/"
 		};
 	},
 	methods: {
-		add:function () {
-			this.$refs.upload.submit();
+		add: function() {
+			this.addActivitie();
 		},
 		addActivitie: function() {
 			console.log(this.activity);
@@ -55,7 +58,9 @@ export default {
 						message: '添加文章成功',
 						type: 'success'
 					});
-					this.$router.push({name:"ActivityList"})
+					console.log(res.data.data);
+					this.file.activityId = res.data.data;
+					this.$refs.upload.submit();
 				} else {
 					this.$message({
 						message: res.data.message,
@@ -77,11 +82,13 @@ export default {
 			var response = file.response;
 			if (response != null && response.code == OK) {
 				console.log(response.data);
-				this.file = response.data;
-				this.activity.fileId = this.file.id;
-				this.file.id = 0;
+				this.file.filePath = response.data;
+				this.file.fileName =this.getFileName(this.file.filePath);
+				console.log(this.file.fileName);
 				console.log(this.activity.fileId);
-				this.addActivitie();
+				this.$message.success('上传文件成功');
+				this.saveFile();
+				
 			}
 			this.fileList = fileList.slice(-3);
 		},
@@ -94,12 +101,34 @@ export default {
 		handlePreview: function(file) {
 			console.log(file);
 		},
+		saveFile: function() {
+			this.$axios.post('/api/files/activity', this.file).then(res => {
+				if (res.data.code == OK) {
+					this.$message.success('添加活动成功');
+					this.$router.push({ name: 'ActivityList' });
+				} else {
+					this.$message({
+						message: res.data.message,
+						type: 'error'
+					});
+				}
+			});
+		},
 		handleExceed: function(files, fileList) {
 			this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
 		},
 		beforeRemove: function(file, fileList) {
 			return this.$confirm(`确定移除 ${file.name}？`);
-		}
+		},
+		getFileName: function(filePath) {
+			var fileName = null;
+			if(filePath!=null){
+				if(filePath.indexOf("/") != -1){
+					fileName = filePath.substring(filePath.lastIndexOf("/")+1);
+				}
+			}
+			return fileName;
+		},
 	},
 	created() {
 		this.getActivityTypeList();

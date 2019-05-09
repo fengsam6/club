@@ -4,7 +4,7 @@
 		<div class="wrap">
 			<div class="time">
 				活动举办时间:
-				<span>{{ activity.holeTime }}</span>
+				<span>{{ activity.holdTime }}</span>
 			</div>
 			<div class="site">
 				活动举办地点:

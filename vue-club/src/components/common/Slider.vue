@@ -1,37 +1,53 @@
 <template>
 	<el-carousel indicator-position="outside">
-		<el-carousel-item v-for="img in imgs" :key="img.id"><img :src="img.url" alt="" class="slider-img" /></el-carousel-item>
+		<el-carousel-item v-for="carousel in carouselImg" :key="carousel.id">
+	  <router-link class="img-show" :to="{name:'Passage',params:{id:carousel.passageId}}">
+	  	<img :src="'/fileServer/' + carousel.filePath" alt="carousel.fileName" class="slider-img" />
+	  	</router-link>
+			<!-- <img :src="'/fileServer/' + carousel.filePath" alt="carousel.fileName" class="slider-img" /> -->
+		</el-carousel-item>
 	</el-carousel>
 </template>
 
 <script>
-
+	const OK =200
 export default {
 	data() {
 		return {
-			imgs: [
-				{
-					id: 1,
-					url: '/fileServer/carusel-img/c1.jpg'
-				},
-				{
-					id: 2,
-					url: '/fileServer/carusel-img/c2.jpg'
-				},
-				{
-					id: 3,
-					url: '/fileServer/carusel-img/c3.jpg'
-				}
-			]
+			carouselImg: [],
 		};
 	},
-	methods: {},
-	mounted() {}
+	methods: {
+		getCarouselList: function(typeId, pageSize) {
+			this.$axios
+				.get('/api/files', {
+					params: {
+						fileTypeId: typeId,
+						pageNum: 1,
+						pageSize: pageSize
+					}
+				})
+				.then(res => {
+					if (res.data.code == OK) {
+						console.log(res.data.data.list);
+						this.carouselImg = res.data.data.list;
+					} else {
+						this.$layer.alert(res.data.data);
+					}
+				});
+		},
+
+		refreshPasagePage: function() {
+			this.getCarouselList(4, 6);
+		}
+	},
+	created() {
+		this.getCarouselList(4, 6);
+	}
 };
 </script>
 
 <style scoped="scoped">
-
 .el-carousel__item h3 {
 	color: #475669;
 	font-size: 18px;

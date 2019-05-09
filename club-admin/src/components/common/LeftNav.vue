@@ -34,9 +34,11 @@
 		</el-submenu>
 		<el-submenu index="5">
 			<template slot="title">
-				文件管理
+				资源管理
 			</template>
-			<el-menu-item index="5-1"><router-link :to="{ name: 'FileList' }">文件列表</router-link></el-menu-item>
+			<el-menu-item index="5-1"><router-link :to="{ name: 'FileList',query:{fileTypeId:3} }">文件下载</router-link></el-menu-item>
+			<el-menu-item index="5-1"><router-link :to="{ name: 'CarouselList',query:{fileTypeId:4} }">首页轮播图</router-link></el-menu-item>
+			<el-menu-item index="5-1"><router-link :to="{ name: 'HotActivities',query:{fileTypeId:6} }">热门活动</router-link></el-menu-item>
 		</el-submenu>
 		<el-submenu index="5">
 			<template slot="title">
