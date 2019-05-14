@@ -52,7 +52,7 @@ export default {
 
 <style scoped="scoped">
 .header {
-	/* width: 1196px; */
+	min-width: 1196px;
 	height: 70px;
 	/* margin: 0 auto; */
 	background-color: #2f4056;

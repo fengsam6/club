@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<Slider />
-		<el-row :gutter="100">
+		<el-row :gutter="60">
 			<el-col :span="12">
 				<div class="" v-if="topNoticesVo != null">
 					<div class="news-title-wrap" v-if="topNoticesVo.passageType != null">
@@ -40,21 +40,6 @@
 		
 		<div class="news-title-wrap show-wrap"><div class="news-title show">视展青春</div></div>
 		<el-row :gutter="10">
-			<!-- <el-col :span="6" v-for="activity in activityList" :key="activity.id">
-				<a class="img-show"><img :src="'/fileServer'" alt="activity.activityName" class="show-picture" /></a>
-			</el-col>
-			<el-col :span="6">
-				<div class="img-show"><img src="/fileServer/show-img/p1.jpg" alt="" class="show-picture" /></div>
-			</el-col>
-			<el-col :span="6">
-				<div class="img-show"><img src="/fileServer/show-img/p2.jpg" alt="" class="show-picture" /></div>
-			</el-col>
-			<el-col :span="6">
-				<div class="img-show"><img src="/fileServer/show-img/p3.jpg" alt="" class="show-picture" /></div>
-			</el-col>
-			<el-col :span="6">
-				<div class="img-show"><img src="/fileServer/show-img/p4.jpg" alt="" class="show-picture" /></div>
-			</el-col> -->
 			<IndexHotActivities/>
 		</el-row>
 	</div>
@@ -153,7 +138,7 @@ export default {
 }
 
 .news-title-wrap .more {
-	margin-left: 340px;
+	margin-left: 275px;
 	color: #fff;
 	font-size: 16px;
 	cursor: pointer;
@@ -178,7 +163,7 @@ export default {
 	width: 270px;
 	height: 32px;
 	line-height: 32px;
-	margin: 0 25px;
+	margin-left: 25px;
 	text-align: left;
 
 	-webkit-line-clamp: 1;
@@ -190,7 +175,7 @@ export default {
 
 .news-list li span {
 	display: inline-block;
-	margin-left: 30px;
+	margin-left: 15px;
 	color: #000;
 	font-size: 16px;
 	height: 32px;

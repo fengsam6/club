@@ -14,12 +14,10 @@
 			<el-button type="success" icon="el-icon-plus" @click="addPage()">添加</el-button>
 		</el-form>
 		<el-table :data="clubData" stripe style="width:100%" border>
-			<el-table-column prop="num" label="num" width="180"></el-table-column>
+			<el-table-column prop="num" label="社团编号" width="80"></el-table-column>
 			<el-table-column prop="name" label="社团名称" width="180"></el-table-column>
-			<!-- <el-table-column prop="introduce" label="文社团简介" width="180"></el-table-column> -->
-			<el-table-column prop="createTime" label="创建时间" width="180"></el-table-column>
-			<el-table-column prop="clubType.type" label="团类型"></el-table-column>
-			<el-table-column prop="status" label="社团状态" width="180"></el-table-column>
+			<el-table-column prop="createTime" label="创建时间" width="140"></el-table-column>
+			<el-table-column prop="clubType.type" label="社团类型" ></el-table-column>
 			<el-table-column fixed="right" label="操作" width="270">
 				<template slot-scope="scope">
 					<el-button type="primary" icon="el-icon-edit" @click="editPage(scope.row)" size="mini">编辑</el-button>

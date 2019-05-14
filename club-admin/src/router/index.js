@@ -54,112 +54,112 @@ export default new Router({
 				{
 					name: 'EditPassage',
 					path: 'passages/edit.html',
-					component: EditPassage
+					component:resolve => require(['@/components/passage/EditPassage'],resolve)
 				},
 				{
 					name: 'AddPassage',
 					path: 'passages/add.html',
-					component: AddPassage
+					component:resolve => require(['@/components/passage/AddPassage'],resolve)
 				},
 				{
 					name: 'PassageList',
 					path: 'passages',
-					component: PassageList
+					component:resolve => require(['@/components/passage/PassageList'],resolve)
 				},
 				{
 					name: 'PassageTypeList',
 					path: 'passageTypes',
-					component: PassageTypeList
+					component:resolve => require(['@/components/passage/PassageTypeList'],resolve)
 				},
 
 				{
 					name: 'AddClub',
 					path: 'clubs/add.html',
-					component: AddClub
+					component:resolve => require(['@/components/club/AddClub'],resolve)
 				},
 				{
 					name: 'ClubList',
 					path: 'clubs',
-					component: ClubList
+					component:resolve => require(['@/components/club/ClubList'],resolve)
 				},
 				{
 					name: 'ClubTypeList',
 					path: 'clubTypes',
-					component: ClubTypeList
+					component:resolve => require(['@/components/club/ClubTypeList'],resolve)
 				},
 				{
 					name: 'EditClub',
 					path: 'clubs/edit.html',
-					component: EditClub
+					component:resolve => require(['@/components/club/EditClub'],resolve)
 				},
 
 				{
 					path: 'activities/edit.html',
 					name: 'EditActivity',
-					component: EditActivity
+					component:resolve => require(['@/components/activity/EditActivity'],resolve)
 				},
 				{
 					name: 'ActivityList',
 					path: 'activities',
-					component: ActivityList
+					component:resolve => require(['@/components/activity/ActivityList'],resolve)
 				},
 				{
 					name: 'ActivityTypeList',
 					path: 'activityTypes',
-					component: ActivityTypeList
+					component:resolve => require(['@/components/activity/ActivityTypeList'],resolve)
 				},
 				{
 					path: 'activities/add.html',
 					name: 'AddActivity',
-					component: AddActivity
+					component:resolve => require(['@/components/activity/AddActivity'],resolve)
 				},
 
 				{
 					name: 'AddFile',
 					path: 'files/add.html',
-					component: AddFile
+					component:resolve => require(['@/components/file/FileList'],resolve)
 				},
 				{
 					name: 'EditFile',
 					path: 'files/edit.html',
-					component: EditFile
+					component:resolve => require(['@/components/file/EditFile'],resolve)
 				},
 				{
 					name: 'FileList',
 					path: 'files',
-					component: FileList
+				component:resolve => require(['@/components/file/FileList'],resolve)
 				},
 				{
 					name: 'CarouselList',
 					path: 'carousels',
-					component: CarouselList
+					component:resolve => require(['@/components/file/CarouselList'],resolve)
 				},
 				{
 					name: 'HotActivities',
 					path: 'hotActivities',
-					component: HotActivities
+					component:resolve => require(['@/components/file/HotActivities'],resolve)
 				},
 				
 				
 				{
 					name: 'AddUser',
 					path: 'users/add.html',
-					component: AddUser
+					component:resolve => require(['@/components/user/AddUser'],resolve)
 				},
 				{
 					name: 'EditUser',
 					path: 'users/edit.html',
-					component: EditUser
+					component:resolve => require(['@/components/user/EditUser'],resolve)
 				},
 				{
 					name: 'UserRoleList',
 					path: 'user/userRoles',
-					component: UserRoleList
+					component:resolve => require(['@/components/user/UserRoleList'],resolve)
 				},
 				{
 					name: 'UserList',
 					path: 'users',
-					component: UserList
+					component:resolve => require(['@/components/user/UserList'],resolve)
 				},
 			]
 		},

@@ -95,7 +95,7 @@ export default {
 	.share{
 		position: fixed;
 		bottom: 110px;
-		right: 120px;
+		right: 320px;
 	}
 	.qqFriend{
 		/* background:url(/static/share.jpg) ; */

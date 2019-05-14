@@ -34,6 +34,7 @@ export default {
 
 .main {
 	min-height: 560px;
+	min-width: 996px;
 	padding: 15px;
 	margin-bottom: 25px;
 }

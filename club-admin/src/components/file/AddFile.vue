@@ -8,12 +8,6 @@
 				<div slot="tip" class="el-upload__tip">选择要上传的文件，且不超过2M</div>
 			</el-upload>
 		</el-form-item>
-		<!-- <el-form-item label="新闻类型" >
-			<el-select  v-model="file.fileTypeId" placeholder="请选择新闻类型">
-				<el-option v-for="fileType in fileTypeList"  :key="fileType.id" :label="fileType.type" :value="fileType.id"></el-option>
-			</el-select>
-			
-		</el-form-item> -->
 		<el-form-item >
 			<el-button type="primary" @click="add">添加</el-button>
 			<el-button @click="goBack">返回</el-button>
@@ -28,7 +22,8 @@ export default {
 		return {
 			file: {},
 			fileTypeList: [],
-			fileList:[]
+			fileList:[],
+			fileTypeId:3
 		};
 	},
 	components: {
@@ -57,7 +52,7 @@ export default {
 			if (response != null && response.code == OK) {
 				console.log(response.data);
 				this.$message.success("上传文件成功");
-				this.$router.push({name:"FileList"})
+				this.$router.push({name:"FileList",query:{fileTypeId:this.fileTypeId}})
 			}
 			this.fileList = fileList.slice(-3);
 		},

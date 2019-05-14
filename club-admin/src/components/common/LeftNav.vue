@@ -36,9 +36,9 @@
 			<template slot="title">
 				资源管理
 			</template>
-			<el-menu-item index="5-1"><router-link :to="{ name: 'FileList',query:{fileTypeId:3} }">文件下载</router-link></el-menu-item>
-			<el-menu-item index="5-1"><router-link :to="{ name: 'CarouselList',query:{fileTypeId:4} }">首页轮播图</router-link></el-menu-item>
-			<el-menu-item index="5-1"><router-link :to="{ name: 'HotActivities',query:{fileTypeId:6} }">热门活动</router-link></el-menu-item>
+			<el-menu-item index="5-1"><router-link :to="{ name: 'FileList', query: { fileTypeId: 3 } }">文件下载</router-link></el-menu-item>
+			<el-menu-item index="5-1"><router-link :to="{ name: 'CarouselList', query: { fileTypeId: 4 } }">首页轮播图</router-link></el-menu-item>
+			<el-menu-item index="5-1"><router-link :to="{ name: 'HotActivities', query: { fileTypeId: 6 } }">热门活动</router-link></el-menu-item>
 		</el-submenu>
 		<el-submenu index="5">
 			<template slot="title">
@@ -50,9 +50,25 @@
 </template>
 
 <script>
+	const OK = 200
 export default {
 	data() {
-		return {};
+		return {
+			activeIndex: '1',
+			accessFrontUrl: 'http://localhost:8011/'
+		};
+	},
+	methods: {
+		getFronUrl: function() {
+			this.$axios.get('/api/system/frontUrl').then(res => {
+				if (res.data.code == OK) {
+					this.accessFrontUrl = res.data.data;
+				}
+			});
+		}
+	},
+	created: function() {
+		// this.getFronUrl();
 	}
 };
 </script>

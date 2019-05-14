@@ -17,6 +17,7 @@
 <style scoped="scoped">
 	.fooetr-wrap {
 		background-color:#2f4056;
+		min-width: 996px;
 	}
 
 	.fooetr-wrap .fooetr {

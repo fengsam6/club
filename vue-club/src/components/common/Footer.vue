@@ -18,10 +18,11 @@
 <style scoped="scoped">
 	.fooetr-wrap {
 		background-color:#9a0e14 ;
+		min-width: 1024px;
 	}
 
 	.fooetr-wrap .fooetr {
-		width: 1196px;
+		width: 1024px;
 		margin: 0 auto;
 		height: 80px;
 	}

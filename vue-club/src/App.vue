@@ -28,7 +28,7 @@
 		/* background-color: #E9EEF3; */
 		color: #333;
 		text-align: center;
-		width: 1200px;
+		width: 1024px;
 		min-height: 600px;
 		margin: 0 auto;
 	}

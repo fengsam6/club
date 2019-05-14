@@ -51,7 +51,7 @@
 				<router-link :to="{name:'ClubList',query:{num:1}}">社团申请</router-link>
 			</el-menu-item> -->
 			<el-menu-item index="7" class="rightMenu">
-				<a :href="adminAccessUrl" target="_blank">登录</a>
+				<a  href="#" @click="goAdminUrl" >登录</a>
 			</el-menu-item>
 		</el-menu>
 		
@@ -61,15 +61,33 @@
 </template>
 
 <script>
+	const OK = 200
 	export default {
 
 		data() {
 			return {
 				activeIndex: '1',
-				adminAccessUrl:"http://localhost:8080/"
+				adminAccessUrl: "http://127.0.0.1:8080/"
 			}
 		},
-		created: function() {},
+		methods:{
+			getAdminUrl:function(){
+				this.$axios
+					.get('/api/system/adminUrl')
+					.then(res => {
+						if (res.data.code == OK) {
+							this.adminAccessUrl=res.data.data;
+						}
+					});
+			},
+			goAdminUrl:function(){
+				// window.location.href = this.adminAccessUrl
+				window.open(this.adminAccessUrl, "_blank");
+			}
+		},
+		created: function() {
+			// this.getAdminUrl();
+		},
 		mounted: function() {
 
 		}
@@ -79,12 +97,13 @@
 <style scoped="scoped">
 	.header-wrap {
 		background-color: #9a0e14;
+		min-width: 1024px;
 	}
 
 	.header {
-		width: 1196px;
-		height: 80px;
-		line-height: 80px;
+		width: 1024px;
+		height: 70px;
+		line-height: 70px;
 		margin: 0 auto;
 	}
 
@@ -93,8 +112,8 @@
 	}
 	.rightMenu{
 		float: right;
-		height: 80px;
-		line-height: 80px;
+		height: 70px;
+		line-height: 70px;
 		background-color: #000000;
 	}
 	a {

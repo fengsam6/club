@@ -14,52 +14,53 @@ import FileList from '@/components/file/FileList'
 Vue.use(Router)
 /* eslint-disable */
 export default new Router({
-	mode: "history",
+	// mode: "history",
 	routes: [{
 			path: '/',
+			base:"/club",
 			name: 'Home',
 			component: Home
 		},
 		{
 			name: 'Passage',
-			path: '/passages/:id',
-			component: Passage
+			path: '/passages/:id/detail.html',
+			 component:resolve => require(['@/components/passage/Passage'],resolve)
 		},
 		{
 			name: 'PassageList',
 			path: '/passages',
-			component: PassageList
+			 component:resolve => require(['@/components/passage/PassageList'],resolve)
 		},
 		{
 			name: 'Club',
 			path: '/clubs/:num',
-			component: Club
+			 component:resolve => require(['@/components/club/Club'],resolve)
 		},
 		{
 			name: 'ClubList',
 			path: '/clubs',
-			component: ClubList
+			 component:resolve => require(['@/components/club/ClubList'],resolve)
 		},
 
 		{
-			path: '/activities/:id',
+			path: '/activities/:id/detail.html',
 			name: 'Activity',
-			component: Activity
+			 component:resolve => require(['@/components/activity/Activity'],resolve)
 		},
 		{
 			name: 'ActivityList',
 			path: '/activities',
-			component: ActivityList
+			 component:resolve => require(['@/components/activity/ActivityList'],resolve)
 		},
 		{
 			name: 'File',
-			path: '/files/:id',
-			component: File
+			path: '/files/:id/detail.html',
+			component:resolve => require(['@/components/file/File'],resolve)
 		},
 		{
 			name: 'FileList',
 			path: '/files',
-			component: FileList
+			component:resolve => require(['@/components/file/FileList'],resolve)
 		},
 		
 		{
