@@ -51,14 +51,15 @@ export default {
 				)
 				.then(res => {
 					console.log(this.club);
-					// this.$layer.msg(res.data);
 					console.log(res.data);
 					if (res.data.code == OK) {
 						this.$message({
 							message: '添加社团成功',
 							type: 'success'
 						});
-						this.$router.push({name:"ClubList"})
+						setTimeout(()=>{
+							this.$router.push({name:"ClubList"})
+						},2000)
 					} else {
 						this.$message({
 							message: res.data.message,
@@ -67,7 +68,7 @@ export default {
 					}
 				}).catch(function (error) {
                     this.$message.error(error);
-                  });;
+                  });
 		},
 		getClubTypeList: function() {
 			this.$axios.get('/api/clubTypes').then(res => {

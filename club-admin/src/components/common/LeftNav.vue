@@ -22,7 +22,7 @@
 			</template>
 			<el-menu-item index="3-1"><router-link :to="{ name: 'ClubList' }">社团列表</router-link></el-menu-item>
 			<el-menu-item index="3-2"><router-link :to="{ name: 'AddClub' }">添加社团</router-link></el-menu-item>
-			<el-menu-item index="1-3"><router-link :to="{ name: 'ClubTypeList' }">文章类型列表</router-link></el-menu-item>
+			<el-menu-item index="1-3"><router-link :to="{ name: 'ClubTypeList' }">社团类型列表</router-link></el-menu-item>
 		</el-submenu>
 		<el-submenu index="4">
 			<template slot="title">
@@ -68,7 +68,7 @@ export default {
 		}
 	},
 	created: function() {
-		// this.getFronUrl();
+		this.getFronUrl();
 	}
 };
 </script>

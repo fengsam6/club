@@ -19,7 +19,7 @@
 		</el-form-item>
 		<el-form-item>
 			<el-button type="primary" @click="add">添加</el-button>
-			<el-button>取消</el-button>
+			<el-button @click="goBack">返回</el-button>
 		</el-form-item>
 	</el-form>
 </template>
@@ -46,21 +46,26 @@ export default {
 	methods: {
 		add: function() {
 			this.addActivitie();
+			
 		},
 		addActivitie: function() {
 			console.log(this.activity);
 			this.$axios.post('/api/activities/', this.activity).then(res => {
 				console.log(this.activity);
-				// this.$layer.msg(res.data);
 				console.log(res.data);
 				if (res.data.code == OK) {
-					this.$message({
-						message: '添加文章成功',
-						type: 'success'
-					});
 					console.log(res.data.data);
 					this.file.activityId = res.data.data;
 					this.$refs.upload.submit();
+					setTimeout(()=>{
+						this.$message({
+							message: '添加活动成功',
+							type: 'success'
+						});	
+					},900)
+					setTimeout(()=>{
+						this.$router.push({ name: 'ActivityList' });
+					},1500)
 				} else {
 					this.$message({
 						message: res.data.message,
@@ -86,26 +91,20 @@ export default {
 				this.file.fileName =this.getFileName(this.file.filePath);
 				console.log(this.file.fileName);
 				console.log(this.activity.fileId);
-				this.$message.success('上传文件成功');
 				this.saveFile();
-				
+				this.$message.success('上传文件成功');
 			}
 			this.fileList = fileList.slice(-3);
 		},
-		handleSuccess: function(response, file, fileList) {
-			//图片上传成功
-			console.log(res);
-			console.log(file);
-			// this.imageUrl = URL.createObjectURL(file.raw);
-		},
+	
 		handlePreview: function(file) {
 			console.log(file);
 		},
 		saveFile: function() {
 			this.$axios.post('/api/files/activity', this.file).then(res => {
 				if (res.data.code == OK) {
-					this.$message.success('添加活动成功');
-					this.$router.push({ name: 'ActivityList' });
+					// this.$message.success('添加活动成功');
+					// this.$router.push({ name: 'ActivityList' });
 				} else {
 					this.$message({
 						message: res.data.message,
@@ -129,6 +128,9 @@ export default {
 			}
 			return fileName;
 		},
+		goBack:function(){
+			this.$router.back(-1)
+		}
 	},
 	created() {
 		this.getActivityTypeList();

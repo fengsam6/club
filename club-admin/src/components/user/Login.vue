@@ -36,34 +36,35 @@ export default {
 					console.log(res.data);
 					if (res.data.code == OK) {
 						this.$message.success('登录成功');
-						this.$cookies.set('token', res.data.data,60*30);
+						this.$cookies.set('token', res.data.data, 60 * 30);
 						this.token = res.data.data;
 						console.log(this.token);
-						this.$router.push({ name: 'Home'});
+						this.$router.push({ name: 'Home' });
 					} else {
 						this.$message.error(res.data.message);
 						this.refreshCode();
 					}
 				})
-				.catch(function(error) {
-					// this.$message.error(error);
-					console.log(error)
-					// this.refreshCode();
-				});
+				.catch(function (error) {
+				    this.$message.error(error);
+				  });
 		},
 		refreshCode: function() {
 			this.captchaUrl = '/api/users/getKaptcha?time=' + new Date().getTime();
 			console.log('更新' + this.captchaUrl);
 		},
 		resetForm: function() {},
-		tryToAminPage:function(){
+		tryToAminPage: function() {
 			var token = this.$cookies.get('token');
-			if(token!=null)
-			  this.$router.push({name:"Home"})
+			if (token != null) this.$router.push({ name: 'Home' });
+		},
+		test: function() {
+			(this.user.account = 'test@163.com'), (this.user.password = '123456');
 		}
 	},
 	created() {
 		// this.tryToAminPage();
+		this.test();
 		this.refreshCode();
 	}
 };

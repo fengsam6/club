@@ -26,7 +26,7 @@
 		</el-form-item>
 		<el-form-item>
 			<el-button type="primary" @click="add">添加</el-button>
-			<el-button>取消</el-button>
+			<el-button @click="goBack">返回</el-button>
 		</el-form-item>
 	</el-form>
 </template>
@@ -49,7 +49,7 @@ export default {
 			imageUrl: '',
 			fileList: [],
 			file: {},
-			isCarousel:false,
+			isCarousel: false,
 			relativePath: '/images/passage/'
 		};
 	},
@@ -58,43 +58,63 @@ export default {
 			this.addNews();
 		},
 		addNews: function() {
-			this.$axios.post('/api/passages', this.passage).then(res => {
-				if (res.data.code == OK) {
-					// this.$message.success('添加新闻成功');
-					this.passageId = res.data.data;
-					this.file.passageId = this.passageId;
-					console.log('文件id：' + this.passageId);
-					this.$refs.upload.submit();
-					// this.$router.push({ name: 'PassageList' });
-				} else {
-					this.$message({
-						message: res.data.message,
-						type: 'error'
-					});
-				}
-			});
+			this.$axios
+				.post('/api/passages', this.passage)
+				.then(res => {
+					if (res.data.code == OK) {
+						// this.$message.success('添加新闻成功');
+						this.passageId = res.data.data;
+						this.file.passageId = this.passageId;
+						console.log('文件id：' + this.passageId);
+						this.$refs.upload.submit();
+						setTimeout(() => {
+							this.$message.success('添加新闻成功');
+						}, 800);
+						setTimeout(() => {
+							this.$router.push({ name: 'PassageList' });
+						}, 1500);
+					} else {
+						this.$message({
+							message: res.data.message,
+							type: 'error'
+						});
+					}
+				})
+				.catch(function(error) {
+					this.$message.error(error);
+				});
 		},
 		saveFile: function() {
-			this.$axios.post('/api/files/passage', this.file).then(res => {
-				if (res.data.code == OK) {
-					this.$message.success('添加新闻成功');
-					this.$router.push({ name: 'PassageList' });
-				} else {
-					this.$message({
-						message: res.data.message,
-						type: 'error'
-					});
-				}
-			});
+			this.$axios
+				.post('/api/files/passage', this.file)
+				.then(res => {
+					if (res.data.code == OK) {
+						this.$message.success('上传文件成功');
+						// this.$router.push({ name: 'PassageList' });
+					} else {
+						this.$message({
+							message: res.data.message,
+							type: 'error'
+						});
+					}
+				})
+				.catch(function(error) {
+					this.$message.error(error);
+				});
 		},
 		getNewsTypeList: function() {
-			this.$axios.get('/api/passageTypes').then(res => {
-				if (res.data.code == OK) {
-					this.newsTypeList = res.data.data;
-				} else {
-					this.$message.error(res.data.data);
-				}
-			});
+			this.$axios
+				.get('/api/passageTypes')
+				.then(res => {
+					if (res.data.code == OK) {
+						this.newsTypeList = res.data.data;
+					} else {
+						this.$message.error(res.data.data);
+					}
+				})
+				.catch(function(error) {
+					this.$message.error(error);
+				});
 		},
 		handleChange: function(file, fileList) {
 			var response = file.response;
@@ -123,13 +143,16 @@ export default {
 		beforeRemove: function(file, fileList) {
 			return this.$confirm(`确定移除 ${file.name}？`);
 		},
-		changeFileType:function(){
-			if(this.isCarousel){
-				this.file.fileTypeId=4
-			}else{
-				this.file.fileTypeId=5
+		changeFileType: function() {
+			if (this.isCarousel) {
+				this.file.fileTypeId = 4;
+			} else {
+				this.file.fileTypeId = 5;
 			}
-			console.log("chnage fileType")
+			console.log('chnage fileType');
+		},
+		goBack: function() {
+			this.$router.back(-1);
 		}
 	},
 	created() {

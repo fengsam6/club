@@ -64,7 +64,7 @@ module.exports = {
 		// https://vue-loader.vuejs.org/en/options.html#cachebusting
 		cacheBusting: true,
 
-		cssSourceMap: true
+		cssSourceMap: false
 	},
 
 	build: {
@@ -98,7 +98,7 @@ module.exports = {
 		// Surge or Netlify already gzip all static assets for you.
 		// Before setting to `true`, make sure to:
 		// npm install --save-dev compression-webpack-plugin
-		productionGzip: false,
+		productionGzip: true,
 		productionGzipExtensions: ['js', 'css'],
 
 		// Run the build command with an extra argument to

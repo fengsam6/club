@@ -83,14 +83,17 @@ export default {
 					// this.$layer.msg(res.data);
 					console.log(res.data);
 					if (res.data.code == OK) {
-						this.$message.success(	'更新文章成功');
+							this.$message.success('添加新闻成功');
+						setTimeout(()=>{
 						this.$router.push({name:"PassageList"})
+						},1800)
+						
 					} else {
 						this.$message.error(res.data.message);
 					}
 				}).catch(function (error) {
                     this.$message.error(error);
-                  });;
+                  });
 		},
 		getNewsTypeList: function() {
 			this.$axios.get('/api/passageTypes').then(res => {

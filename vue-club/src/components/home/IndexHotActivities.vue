@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<el-col :span="6" v-for="activityImg in hotActivityImgs" :key="activityImg.id">
+		<el-col :span="6" v-for="activityImg in hotActivityImgs" :key="activityImg.id" :xs="24" :sm="12" :md="6">
 			<router-link class="img-show" :to="{name:'Activity',params:{id:activityImg.activityId}}">
 				<img :src="'/fileServer'+activityImg.filePath" alt="activityImg.fileName" class="show-picture" />
 				</router-link>
@@ -56,7 +56,7 @@
 	.show-picture {
 		width: 240px;
 		height: 220px;
-		padding: 8px;
+		padding: 5px;
 		cursor: pointer;
 	}
 </style>

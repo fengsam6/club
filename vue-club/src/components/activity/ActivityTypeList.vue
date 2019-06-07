@@ -1,6 +1,6 @@
 <template>
 	<el-menu default-active="activeIndex" class="el-menu-vertical-demo" active-text-color="#9a0e14" 
-	text-color="#000" background-color="#eee">
+	text-color="#000" >
 		<el-menu-item  v-for="(activityType, index) in activityTypeList" :key="index">
 			<span slot="title">
 				<router-link :to="{name:'ActivityList',query:{typeId:activityType.id}}">{{ activityType.type }}</router-link>
@@ -38,8 +38,10 @@
 <style scoped="scoped">
 	.router-link-exact-active.router-link-active{
 		display: block;
+		width: 100% !important;
 		font-size: 120%;
 		font-weight: 900;
 		color: #9a0e14;
 	}
+	
 </style>

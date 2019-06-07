@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/home/Home'
-import Passage from '@/components/passage/Passage'
-import PassageList from '@/components/passage/PassageList'
-import Club from '@/components/club/Club'
-import ClubList from '@/components/club/ClubList'
-import Activity from '@/components/activity/Activity'
-import ActivityList from '@/components/activity/ActivityList'
-import File from '@/components/file/File'
-import FileList from '@/components/file/FileList'
+// import Home from '@/components/home/Home'
+// import Passage from '@/components/passage/Passage'
+// import PassageList from '@/components/passage/PassageList'
+// import Club from '@/components/club/Club'
+// import ClubList from '@/components/club/ClubList'
+// import Activity from '@/components/activity/Activity'
+// import ActivityList from '@/components/activity/ActivityList'
+// import File from '@/components/file/File'
+// import FileList from '@/components/file/FileList'
 
 
 Vue.use(Router)
@@ -19,7 +19,7 @@ export default new Router({
 			path: '/',
 			base:"/club",
 			name: 'Home',
-			component: Home
+			component: resolve => require(['@/components/home/Home'],resolve)
 		},
 		{
 			name: 'Passage',

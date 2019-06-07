@@ -24,9 +24,15 @@
 	.fooetr-wrap .fooetr {
 		width: 1024px;
 		margin: 0 auto;
-		height: 80px;
+		height: 70px;
 	}
 	.fooetr-wrap .fooetr p{
 		line-height: 16px;
 	}
+	
+	@media screen and (max-width: 600px){
+	  .fooetr-wrap {
+	  	padding: 2px 15px;
+	  }
+	} 
 </style>

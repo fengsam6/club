@@ -25,7 +25,7 @@
 				<ul class="news-list" v-if="newsPageVo.passagePageInfo != null">
 					<li v-for="news in newsPageVo.passagePageInfo.list">
 						<!-- <div> -->
-						<router-link :to="{ name: 'Passage', params: { id: news.id } }">{{ news.title }}</router-link>
+						<router-link :to="{ name: 'Passage', params: { id: news.id } }" :key="news.id">{{ news.title }}</router-link>
 						<span class="time">{{ news.publishTime }}</span>
 						<!-- </div> -->
 					</li>
@@ -119,13 +119,33 @@ export default {
 	display: inline-block;
 	float: left;
 	margin-left: 20px;
-	width: 270px;
+	width: 170px;
 	height: 32px;
 	line-height: 32px;
 	text-align: left;
+	
+	-webkit-line-clamp: 1;
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	white-space: normal;
 }
 .news-list li > .time {
 	float: left;
 	margin-left: 75px;
+}
+
+@media screen and (max-width: 600px) {
+	.el-header, .el-aside {
+		display: none;
+	}
+	.news-list li > a {
+		float: left;
+		width: 100px;
+	}
+	.news-list li > .time {
+		float: left;
+		margin-left: 30px;
+	}
 }
 </style>

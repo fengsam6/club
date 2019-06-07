@@ -86,18 +86,26 @@ export default {
 		}
 	},
 	created() {
-		this.requstUrl = this.$route.path;
+		this.requstUrl = window.location.href;
 	}
 };
 </script>
 
 <style>
 	.share{
-		position: fixed;
+		position: absolute;
 		bottom: 110px;
 		right: 320px;
 	}
 	.qqFriend{
 		/* background:url(/static/share.jpg) ; */
 	}
+	
+	@media screen and (max-width: 600px){
+	  .share{
+	  	position: absolute;
+	  	bottom: 20px;
+	  	right: 20px;
+	  }
+	} 
 </style>

@@ -66,13 +66,15 @@ export default {
 							message: '更新社团成功',
 							type: 'success'
 						});
-						this.$router.push({name:"ClubList"})
+						setTimeout(()=>{
+							this.$router.push({name:"ClubList"})
+						},2000)
 					} else {
 						this.$message.error(res.data.message);
 					}
 				}).catch(function (error) {
                     this.$message.error(error);
-                  });;
+                  });
 		},
 		getClubTypeList: function() {
 			this.$axios.get('/api/clubTypes').then(res => {

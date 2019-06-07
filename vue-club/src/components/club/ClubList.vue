@@ -119,4 +119,10 @@ export default {
 	-webkit-box-orient: vertical;
 	white-space: normal;
 }
+
+@media screen and (max-width: 600px) {
+	.el-header, .el-aside {
+		display: none;
+	}
+}
 </style>
