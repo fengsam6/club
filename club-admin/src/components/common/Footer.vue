@@ -1,6 +1,6 @@
 <template>
 	<div class="footer-wrap">
-		<div class="fooetr">
+		<div class="footer">
 			<p>这是一个简单的毕设作品,欢迎访问社团管理系统,</p>
 			<p>Copyright RF All rights reserved.</p>
 		</div>
@@ -24,7 +24,7 @@
     bottom: 1px;
 	}
 
-	.footer-wrap .fooetr {
+	.footer-wrap .footer {
 		margin: 15px auto;
 		padding-left: 50px;
 		height: 55px;

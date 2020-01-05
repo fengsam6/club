@@ -26,6 +26,7 @@
 			</el-main>
 		</el-container>
 		<el-pagination
+      class=""
 			v-if="clubPageVo.clubPageInfo != null"
 			background
 			layout="prev, pager, next"
@@ -119,7 +120,6 @@ export default {
 	-webkit-box-orient: vertical;
 	white-space: normal;
 }
-
 @media screen and (max-width: 600px) {
 	.el-header, .el-aside {
 		display: none;
