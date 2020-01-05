@@ -1,6 +1,6 @@
 <template>
 	<div v-if="filePage != null">
-		<el-form :inline="true">
+		<el-form :inline="true" size="small">
 			<el-form-item label="文件名称">
 				<el-input placeholder="请输入文件名称" prefix-icon="el-icon-search" v-model="fileName" class="input-with-select" width="120px"></el-input>
 			</el-form-item>
@@ -11,16 +11,16 @@
 				</el-select>
 			</el-form-item>
 			<el-form-item><el-button type="primary" @click="find" icon="el-icon-search">查询</el-button></el-form-item>
-			<el-button type="success" icon="el-icon-plus" @click="addPage()">添加</el-button>
+			<el-button type="success" icon="el-icon-plus" @click="addPage()" size="small">添加</el-button>
 		</el-form>
-		<el-table :data="fileData" stripe style="width:100%" border>
+		<el-table :data="fileData" stripe style="width:100%" border size="mini">
 			<el-table-column prop="id" label="num" width="100"></el-table-column>
 			<el-table-column prop="fileName" label="文件名称" width="180"></el-table-column>
-			<el-table-column prop="filePath" label="文件路径" width="240"></el-table-column>
+			<el-table-column prop="filePath" label="文件路径" ></el-table-column>
 			<el-table-column prop="fileTypeId" label="文件类型id" width="80"></el-table-column>
-			<el-table-column prop="passageId" label="图片关联文章id" width="80"></el-table-column>
-			<el-table-column prop="activityId" label="图片关联活动id" width="80"></el-table-column>
-			<el-table-column fixed="right" label="操作" width="300">
+			<el-table-column prop="passageId" label="图片关联文章id"  ></el-table-column>
+			<el-table-column prop="activityId" label="图片关联活动id"  ></el-table-column>
+			<el-table-column fixed="right" label="操作" width="280">
 				<template slot-scope="scope">
 					<el-button type="primary" icon="el-icon-edit" @click="editPage(scope.row)" size="mini">编辑</el-button>
 					<el-button type="success" icon="el-icon-plus" @click="addPage()" size="mini">添加</el-button>

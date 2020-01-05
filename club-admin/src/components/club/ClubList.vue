@@ -1,6 +1,6 @@
 <template>
 	<div v-if="clubPage != null">
-		<el-form :inline="true">
+		<el-form :inline="true" size="small">
 			<el-form-item label="社团名称">
 				<el-input placeholder="请输入社团名称" prefix-icon="el-icon-search" v-model="clubName" class="input-with-select" width="120px"></el-input>
 			</el-form-item>
@@ -11,14 +11,14 @@
 				</el-select>
 			</el-form-item>
 			<el-form-item><el-button type="primary" @click="find" icon="el-icon-search">查询</el-button></el-form-item>
-			<el-button type="success" icon="el-icon-plus" @click="addPage()">添加</el-button>
+			<el-button type="success" icon="el-icon-plus" @click="addPage()" size="small">添加</el-button>
 		</el-form>
-		<el-table :data="clubData" stripe style="width:100%" border>
-			<el-table-column prop="num" label="社团编号" width="80"></el-table-column>
-			<el-table-column prop="name" label="社团名称" width="180"></el-table-column>
-			<el-table-column prop="createTime" label="创建时间" width="140"></el-table-column>
-			<el-table-column prop="clubType.type" label="社团类型" ></el-table-column>
-			<el-table-column fixed="right" label="操作" width="270">
+		<el-table :data="clubData" stripe style="width:100%" border size="mini">
+			<el-table-column prop="num" label="社团编号" :sortable="true"></el-table-column>
+			<el-table-column prop="name" label="社团名称" :sortable="true"></el-table-column>
+			<el-table-column prop="createTime" label="创建时间" width="140" :sortable="true"></el-table-column>
+			<el-table-column prop="clubType.type" label="社团类型" :sortable="true"></el-table-column>
+			<el-table-column fixed="right" label="操作" >
 				<template slot-scope="scope">
 					<el-button type="primary" icon="el-icon-edit" @click="editPage(scope.row)" size="mini">编辑</el-button>
 					<el-button type="success" icon="el-icon-plus" @click="addPage()" size="mini">添加</el-button>
@@ -27,12 +27,14 @@
 			</el-table-column>
 		</el-table>
 		<el-pagination
+      class="page"
 			background
-			layout="prev, pager, next"
+			layout="total, sizes, prev, pager, next"
 			:current-page.sync="currentPage"
 			:total="clubPage.total"
 			@current-change="refreshClubPage"
-			:page-size="clubPage.pageSize"
+      :page-size="pageSize"
+      :page-sizes="GLOBAL.pageSizeArray"
 		></el-pagination>
 	</div>
 </template>
@@ -48,7 +50,8 @@ export default {
 			clubTypeList: [],
 			clubName: null,
 			clubTypeId: null,
-			currentPage: 1
+			currentPage: 1,
+        pageSize: this.GLOBAL.pageSize
 		};
 	},
 	components: {},
@@ -64,7 +67,7 @@ export default {
 					}
 				})
 				.then(res => {
-					if (res.data.code == OK) {
+					if (res.data.code === OK) {
 						this.clubPage = res.data.data;
 						this.clubData = this.clubPage.list;
 						this.pages = this.clubPage.pages;
@@ -102,14 +105,15 @@ export default {
 			});
 		},
 		find: function() {
-			this.getClubPage(this.currentPage, 8);
+			this.getClubPage(this.currentPage, this.pageSize);
 		},
-		refreshClubPage: function() {
-			this.getClubPage(this.currentPage, 8);
+		refreshClubPage: function(page) {
+        this.currentPage=page
+			this.getClubPage(page, this.pageSize);
 		},
 		getClubTypeList: function() {
 			this.$axios.get('/api/clubTypes').then(res => {
-				if (res.data.code == OK) {
+				if (res.data.code === OK) {
 					this.clubTypeList = res.data.data;
 				} else {
 					this.$message.error(res.data.data);
@@ -117,15 +121,18 @@ export default {
 			});
 		}
 	},
-	created() {
-		this.getClubPage(this.currentPage, 8);
+	mounted() {
+		this.getClubPage(this.currentPage, this.pageSize);
 		this.getClubTypeList();
 	},
 	watch: {
 		$route(to, from) {
-			this.getClubPage(this.currentPage, 8);
+			this.getClubPage(this.currentPage, this.pageSize);
 		}
 	}
 };
 </script>
-<style scoped="scoped"></style>
+<style scoped="scoped">
+  @import "../../css/common.css";
+
+</style>

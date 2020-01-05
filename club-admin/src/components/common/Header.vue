@@ -2,7 +2,7 @@
 	<div class="header">
 		<span class="sys-name">
 			<router-link :to="{ name: 'Home' }">社团管理系统后台</router-link>
-			
+
 		</span>
 		<div class="right-menue" style=”clear:both”>
 			<span class="name">{{ user.name }}，你好</span>
@@ -52,30 +52,32 @@ export default {
 
 <style scoped="scoped">
 .header {
-	min-width: 1196px;
-	height: 70px;
-	/* margin: 0 auto; */
+	position: fixed;
+  top: 0;
+  left: 200px;
+  right: 0;
+	height: 60px;
 	background-color: #2f4056;
 }
 .header .sys-name {
 	display: block;
-	height: 70px;
+	height: 60px;
 	width: 250px;
-	
-	line-height: 70px; 
+
+	line-height: 60px;
 	margin-left: 20px;
 	color: white;
 }
 .header .sys-name a {
 	color: #fff;
 	text-decoration: none;
-	font: 16px;
+	font-size: 16px;
 }
 .right-menue{
-	width: 300px; 
-	height: 70px;
-	line-height: 70px; 
-	margin-top: -70px;
+	width: 300px;
+	height: 55px;
+	line-height: 60px;
+	margin-top: -60px;
 	float: right;
 	color: #eee;
 	/* background-color: #13CE66; */

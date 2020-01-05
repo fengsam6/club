@@ -1,8 +1,12 @@
 <template>
 	<div v-if="activityPage != null">
-		<el-form :inline="true">
-			<el-form-item label="活动名称"><el-input placeholder="请输入活动名称" v-model="activityName" class="input-with-select" width="120px"></el-input></el-form-item>
-			<el-form-item label="活动地点"><el-input placeholder="请输入活动名称" v-model="activitySite" class="input-with-select" width="120px"></el-input></el-form-item>
+		<el-form :inline="true" size="small">
+			<el-form-item label="活动名称">
+        <el-input placeholder="请输入活动名称"   v-model="activityName" class="input-with-select inputStyle" width="120px"></el-input>
+      </el-form-item>
+			<el-form-item label="活动地点">
+        <el-input placeholder="请输入活动名称"  v-model="activitySite" class="input-with-select inputStyle" width="120px">
+        </el-input></el-form-item>
 			<el-form-item label="活动类型" prop="activityTypeId">
 				<el-select v-model="activityTypeId" placeholder="请选择活动类型">
 					<el-option label="所有" value=""></el-option>
@@ -10,15 +14,15 @@
 				</el-select>
 			</el-form-item>
 			<el-form-item><el-button type="primary" @click="find" icon="el-icon-search">查询</el-button></el-form-item>
-			<el-button type="success" icon="el-icon-plus" @click="addPage()" >添加</el-button>
+			<el-button type="success" icon="el-icon-plus" @click="addPage()"  size="small">添加</el-button>
 		</el-form>
-		<el-table :data="activityData" stripe style="width:100%" border>
+		<el-table :data="activityData" stripe style="width:100%" border size="mini">
 			<el-table-column prop="id" label="id" width="80"></el-table-column>
-			<el-table-column prop="activityName" label="活动名称" width="220"></el-table-column>
-			<el-table-column prop="site" label="活动地点" width="180"></el-table-column>
-			<el-table-column prop="applyTime" label="活动申请时间" width="140"></el-table-column>
-			<el-table-column prop="holdTime" label="活动举行时间"></el-table-column>
-			<el-table-column prop="activityType.type" label="活动类型" width="120"></el-table-column>
+			<el-table-column prop="activityName" label="活动名称" width="220" :sortable="true"></el-table-column>
+			<el-table-column prop="site" label="活动地点" width="180" :sortable="true"></el-table-column>
+			<el-table-column prop="applyTime" label="活动申请时间" width="140" :sortable="true"></el-table-column>
+			<el-table-column prop="holdTime" label="活动举行时间" :sortable="true"></el-table-column>
+			<el-table-column prop="activityType.type" label="活动类型" width="120" :sortable="true"></el-table-column>
 			<el-table-column fixed="right" label="操作" width="270">
 				<template slot-scope="scope">
 					<el-button type="primary" icon="el-icon-edit" @click="editPage(scope.row)" size="mini">编辑</el-button>
@@ -27,13 +31,15 @@
 				</template>
 			</el-table-column>
 		</el-table>
-		<el-pagination
-			background
-			layout="prev, pager, next"
+    <el-pagination
+      class="page"
+      background
+      layout="total, sizes, prev, pager, next"
 			:current-page.sync="currentPage"
 			:total="activityPage.total"
 			@current-change="refreshactivityPage"
-			:page-size="activityPage.pageSize"
+			:page-size="GLOBAL.pageSize"
+      :page-sizes="GLOBAL.pageSizeArray"
 		></el-pagination>
 	</div>
 </template>
@@ -94,8 +100,8 @@ export default {
 			});
 		},
 		deleteActivity: function(row) {
-			var id = row.id;
-			this.$confirm('此操作将永久删除该活动, 是否继续?', '提示', {
+        const id = row.id;
+        this.$confirm('此操作将永久删除该活动, 是否继续?', '提示', {
 				confirmButtonText: '确定',
 				cancelButtonText: '取消',
 				type: 'warning'
@@ -138,4 +144,6 @@ export default {
 	}
 };
 </script>
-<style scoped="scoped"></style>
+<style scoped="scoped">
+  @import "../../css/common.css";
+</style>

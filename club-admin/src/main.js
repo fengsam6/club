@@ -9,6 +9,8 @@ import layer from 'vue-layer'
 
 import VueCookies from 'vue-cookies'
 Vue.use(VueCookies)
+import global_variable from "./js/global_variable";
+Vue.prototype.GLOBAL=global_variable
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
@@ -43,7 +45,7 @@ axios.interceptors.response.use(response => {
 }, error => {
 	console.log(error)
 	if (error.response) {
-		
+
 	}
 	return Promise.reject(error.response.data) // 返回接口返回的错误信息
 });

@@ -1,0 +1,13 @@
+/*定义公共样式*/
+.page{
+  width: 380px;
+  position: fixed;
+  bottom: 82px;
+  left: 60px;
+  right: 60px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.inputStyle{
+  width: 160px;
+}

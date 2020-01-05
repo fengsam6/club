@@ -1,9 +1,10 @@
 <template>
 	<div >
-		<v-header />
+
 		<el-container width="100%">
 			<el-aside width="200px" class="left-nav-container"><left-nav /></el-aside>
 			<el-container  direction="vertical">
+        <v-header />
 				<router-view class="main" />
 				<v-footer />
 			</el-container>
@@ -33,9 +34,11 @@ export default {
 
 
 .main {
-	min-height: 560px;
+  margin-top: 70px;
+	min-height: 500px;
 	min-width: 996px;
-	padding: 15px;
+	padding: 4px 10px;
+  overflow: hidden;
 	margin-bottom: 25px;
 }
 

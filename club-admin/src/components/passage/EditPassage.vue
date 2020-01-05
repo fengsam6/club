@@ -1,28 +1,30 @@
 <template>
-	<el-form class="" :model="passage" label-width="80px">
-		<el-form-item label="新闻标题"><el-input v-model="passage.title"></el-input></el-form-item>
+	<el-form class="" :model="passage" label-width="80px" size="small" >
+		<el-form-item label="新闻标题">
+      <el-input v-model="passage.title"  class="inputStyle"></el-input>
+    </el-form-item>
 		<el-form-item label="发布时间"><el-date-picker    type="date"  format="yyyy年MM月dd 日" value-format="yyyy年MM月dd 日" placeholder="选择日期" v-model="passage.publishTime"></el-date-picker></el-form-item>
 		<quill-editor
 			v-model="passage.content"
 			ref="myQuillEditor"
 			:options="editorOption"
 			name="content"
+      class="editor"
 		></quill-editor>
-		</textarea>
-		<el-form-item label="新闻类型" >
+		<el-form-item label="新闻类型" class="newsTypeClass">
 			<el-select  v-model="passage.passageTypeId" placeholder="请选择新闻类型">
 				<el-option v-for="newsType in newsTypeList"  :key="newsType.id" :label="newsType.type" :value="newsType.id"></el-option>
 			</el-select>
-			
+
 		</el-form-item>
 		<el-form-item label="查看文件" v-if="fileList!=null">
 			<div v-for="file in fileList" :key="file.id">
 				<img :src="'/fileServer'+file.filePath" class="show-image" :alt="file.fileName" v-if="isImage(file.fileName)">
 				<a :href="'/fileServer'+file.filePath" v-else>{{file.fileName}}</a>
 			</div>
-			
+
 		</el-form-item>
-		
+
 		<el-form-item >
 			<el-button type="primary" @click="update">更新</el-button>
 			<el-button @click="goBack">返回</el-button>
@@ -75,7 +77,7 @@ export default {
 		},
 		update: function() {
 			this.$axios
-				.put('/api/passages/', 
+				.put('/api/passages/',
 					 this.passage
 				)
 				.then(res => {
@@ -87,7 +89,7 @@ export default {
 						setTimeout(()=>{
 						this.$router.push({name:"PassageList"})
 						},1800)
-						
+
 					} else {
 						this.$message.error(res.data.message);
 					}
@@ -104,7 +106,7 @@ export default {
 				}
 			});
 		},
-	
+
 		goBack:function(){
 			this.$router.back(-1)
 		}
@@ -113,7 +115,7 @@ export default {
 		var id = this.$route.query.id;
 		this.get(id);
 		this.getNewsTypeList();
-		
+
 	},
 	watch: {
 		$route(to, from) {
@@ -125,8 +127,15 @@ export default {
 </script>
 
 <style scoped="scoped">
+  @import "../../css/common.css";
 .show-image{
 	width: 350px;
 	height: 220px;
 }
+  .editor{
+    height: 150px;
+  }
+  .newsTypeClass{
+    margin-top: 80px;
+  }
 </style>

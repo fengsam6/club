@@ -1,5 +1,5 @@
 <template>
-	<el-menu default-active="1" background-color="#393d49" text-color="#fff" active-text-color="#5FB878" class="leftNav" unique-opened="true">
+	<el-menu default-active="1" background-color="#2f4056" text-color="#fff" active-text-color="#5FB878" class="leftNav" :unique-opened="true">
 		<el-submenu index="1">
 			<template slot="title">
 				文章管理
@@ -75,11 +75,12 @@ export default {
 
 <style scoped="scoped">
 .leftNav {
-	margin: 0;
-	padding: 0;
-	height: 100%;
-	min-height: 680px;
-	background-color: #393d49;
+  position: fixed;
+	left: 0;
+	top: 0;
+  bottom: 0;
+  width: 200px;
+  background-color:#2f4056 !important;
 }
 .leftNav .el-menu-item a {
 	color: #eee;

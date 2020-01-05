@@ -1,5 +1,5 @@
 <template>
-	<el-table :data="userRoleList" stripe style="width:100%" border>
+	<el-table :data="userRoleList" stripe style="width:100%" border size="mini">
 		<el-table-column prop="id" label="角色id" ></el-table-column>
 		<el-table-column prop="roleName" label="用户角色名称"></el-table-column>
 		<el-table-column fixed="right" label="操作" width="360">

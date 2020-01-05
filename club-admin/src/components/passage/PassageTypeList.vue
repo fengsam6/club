@@ -1,5 +1,5 @@
 <template>
-	<el-table :data="newsTypeList" stripe style="width:100%" border>
+	<el-table :data="newsTypeList" stripe style="width:100%" border size="mini">
 		<el-table-column prop="id" label="id" ></el-table-column>
 		<el-table-column prop="type" label="文章类型" ></el-table-column>
 		<el-table-column fixed="right" label="操作" width="270">

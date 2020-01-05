@@ -1,5 +1,5 @@
 <template>
-	<el-form :model="activity" label-width="100px">
+	<el-form :model="activity" label-width="100px" size="small">
 		<el-form-item label="活动名称"><el-input v-model="activity.activityName"></el-input></el-form-item>
 		<el-form-item label="活动举行时间">
 			<el-date-picker type="date" value-format="yyyy 年 MM 月 dd 日" format="yyyy 年 MM 月 dd 日" placeholder="选择日期" v-model="activity.holdTime"></el-date-picker>
