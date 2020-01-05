@@ -15,6 +15,8 @@ Vue.prototype.GLOBAL=global_variable
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import VueQuillEditor from "vue-quill-editor"
+//引入全局公共样式
+import "./css/common.css"
 // require styles 引入样式
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'

@@ -38,6 +38,7 @@
 			:current-page.sync="currentPage"
 			:total="activityPage.total"
 			@current-change="refreshactivityPage"
+      @size-change="handleSizeChange"
 			:page-size="GLOBAL.pageSize"
       :page-sizes="GLOBAL.pageSizeArray"
 		></el-pagination>
@@ -117,9 +118,14 @@ export default {
 					});
 				});
 		},
-		refreshactivityPage: function() {
-			this.getActivityPage(this.currentPage, 8);
+		refreshactivityPage: function(page) {
+        this.currentPage=page
+			this.getActivityPage(this.currentPage, this.pageSize);
 		},
+      handleSizeChange:function(size){
+          this.pageSize =size
+          this.getActivityPage(this.currentPage, this.pageSize);
+      },
 		find: function() {
 			this.getActivityPage(this.currentPage, 8);
 		},

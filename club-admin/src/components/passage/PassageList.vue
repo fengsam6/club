@@ -17,7 +17,7 @@
       </el-form-item>
       <el-button type="success" icon="el-icon-plus" @click="addPage()" size="small">添加</el-button>
     </el-form>
-    <el-table :data="passageData" height="480" size="mini" stripe style="width:100%" border>
+    <el-table :data="passageData" :height="GLOBAL.tableHeight" size="mini" stripe style="width:100%" border>
       <el-table-column prop="id" label="id" width="80" :sortable="true"></el-table-column>
       <el-table-column prop="title" label="标题" width="180" :sortable="true"></el-table-column>
       <el-table-column prop="passageType.type" label="文章类型" width="180" :sortable="true"></el-table-column>
@@ -151,5 +151,5 @@
     };
 </script>
 <style scoped="scoped">
-  @import "../../css/common.css";
+  /*@import "../../css/common.css";*/
 </style>
